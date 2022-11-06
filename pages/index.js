@@ -1,7 +1,12 @@
 import React from "react";
+import Banner from "../components/Banner";
 
-const Index = () => {
-  return <h1 className='text-3xl font-bold underline'>Hello world!</h1>;
+const Home = () => {
+  return (
+    <div className='min-h-screen'>
+      <Banner />
+    </div>
+  );
 };
 
-export default Index;
+export default Home;
