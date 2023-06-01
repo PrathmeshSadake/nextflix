@@ -23,10 +23,10 @@ function classNames(...classes) {
 export default function Navbar() {
   const user = null;
   return (
-    <Disclosure as='nav' className='bg-white'>
+    <Disclosure as='nav'>
       {({ open }) => (
         <>
-          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+          <div className='mx-auto max-w-7xl'>
             <div className='relative flex h-16 items-center justify-between'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 {/* Mobile menu button*/}
@@ -54,7 +54,7 @@ export default function Navbar() {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-600 hover:bg-gray-300 hover:text-gray-800",
+                            : "text-gray-300 hover:bg-gray-200 hover:text-gray-300",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}

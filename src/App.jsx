@@ -6,9 +6,8 @@ import SignInScreen from "./pages/SignInScreen";
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route path='/' element={<HomeScreen />} />
-      </Route>
+      <Route path='/' element={<HomeScreen />} />
+      <Route path='/' element={<Layout />}></Route>
       <Route path='/signin' element={<SignInScreen />} />
     </Routes>
   );
