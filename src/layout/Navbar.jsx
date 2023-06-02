@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import {
   ArrowRightOnRectangleIcon,
   Bars3Icon,
@@ -8,6 +7,10 @@ import {
 } from "@heroicons/react/24/outline";
 
 import NextflixLogo from "../assets/nextflix-logo.png";
+import ProfileImage from "../assets/profile.jpg";
+
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -21,7 +24,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const user = null;
+  const user = useSelector(selectUser);
+
   return (
     <Disclosure as='nav'>
       {({ open }) => (
@@ -73,68 +77,18 @@ export default function Navbar() {
                     <ArrowRightOnRectangleIcon className='w-4 h-4' />
                   </div>
                 ) : (
-                  <Menu as='div' className='relative ml-3'>
-                    <div>
-                      <Menu.Button className='flex rounded-full bg-gray-800 text-sm border-2 border-gray-800'>
-                        <span className='sr-only'>Open user menu</span>
-                        <img
-                          className='h-9 w-9 rounded-full'
-                          src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                          alt=''
-                        />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter='transition ease-out duration-100'
-                      enterFrom='transform opacity-0 scale-95'
-                      enterTo='transform opacity-100 scale-100'
-                      leave='transition ease-in duration-75'
-                      leaveFrom='transform opacity-100 scale-100'
-                      leaveTo='transform opacity-0 scale-95'
+                  <div className='relative ml-3'>
+                    <Link
+                      to='/profile'
+                      className='flex rounded-full bg-gray-800 text-sm border-2 border-gray-800'
                     >
-                      <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to='/profile'
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Your Profile
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href='#'
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "w-full text-left block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Sign out
-                            </button>
-                          )}
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                      <img
+                        src={ProfileImage}
+                        alt='Profile'
+                        className='h-9 w-9'
+                      />
+                    </Link>
+                  </div>
                 )}
               </div>
             </div>

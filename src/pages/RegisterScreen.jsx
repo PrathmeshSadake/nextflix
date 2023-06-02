@@ -1,15 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import NextflixLogo from "../assets/nextflix-logo.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 export default function SignUp() {
+  const user = useSelector(selectUser);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  if (user) {
+    return <Navigate to='/' replace={true} />;
+  }
 
   const registerUser = (e) => {
     e.preventDefault();

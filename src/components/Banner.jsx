@@ -12,7 +12,6 @@ export default function Banner() {
     fetchData();
   }, []);
 
-  console.log(movie);
   return (
     <div className='relative isolate overflow-hidden bg-gray-900 max-h-screen'>
       {movie && (
