@@ -13,10 +13,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "#", current: true },
+  { name: "Trending", href: "#", current: false },
+  { name: "Top Rated", href: "#", current: false },
+  { name: "Upcoming", href: "#", current: false },
 ];
 
 function classNames(...classes) {
