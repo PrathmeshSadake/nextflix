@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import NextflixLogo from "../assets/nextflix-logo.png";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function SignUp() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,10 +15,13 @@ export default function SignUp() {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        toast.success("Account created successfully.");
+        updateProfile(auth.currentUser, {
+          displayName: `${firstName} ${lastName}`,
+        }).then(() => {
+          const user = userCredential.user;
+          console.log(user);
+          toast.success("Account created successfully.");
+        });
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -38,7 +43,43 @@ export default function SignUp() {
       </div>
 
       <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-        <form className='space-y-6' onSubmit={registerUser}>
+        <form className='space-y-4' onSubmit={registerUser}>
+          <div>
+            <label
+              htmlFor='firstName'
+              className='block text-sm font-medium leading-6 text-gray-300'
+            >
+              First Name
+            </label>
+            <div className='mt-0.5'>
+              <input
+                id='firstName'
+                name='firstName'
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className='block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6 px-2'
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor='lastName'
+              className='block text-sm font-medium leading-6 text-gray-300'
+            >
+              Last Name
+            </label>
+            <div className='mt-0.5'>
+              <input
+                id='lastName'
+                name='lastName'
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className='block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6 px-2'
+              />
+            </div>
+          </div>
           <div>
             <label
               htmlFor='email'
@@ -46,7 +87,7 @@ export default function SignUp() {
             >
               Email address
             </label>
-            <div className='mt-2'>
+            <div className='mt-0.5'>
               <input
                 id='email'
                 name='email'
@@ -77,7 +118,7 @@ export default function SignUp() {
                 </a>
               </div>
             </div>
-            <div className='mt-2'>
+            <div className='mt-0.5'>
               <input
                 id='password'
                 name='password'

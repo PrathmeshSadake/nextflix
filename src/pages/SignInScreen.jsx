@@ -14,7 +14,7 @@ export default function SignIn() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        toast.success(`Signed in as ${user.email}`);
+        toast.success(`Signed in as ${user.displayName}`);
       })
       .catch((error) => {
         // const errorCode = error.code;
