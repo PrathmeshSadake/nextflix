@@ -8,3 +8,19 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: black;
 }
+
+.bg-banner {
+  background: url("https://raw.githubusercontent.com/thatanjan/netflix-clone-yt/youtube/media//banner.jpg")
+    no-repeat center center fixed;
+  background-color: rgba(0, 0, 0, 0.614);
+  background-blend-mode: multiply;
+  min-height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+}

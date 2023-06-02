@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
 import NextflixLogo from "../assets/nextflix-logo.png";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function SignIn() {
+export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const signInUser = (e) => {
+
+  const registerUser = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        toast.success(`Signed in as ${user.email}`);
+        console.log(user);
+        toast.success("Account created successfully.");
       })
       .catch((error) => {
         // const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
         toast.error(errorMessage);
       });
   };
@@ -30,11 +33,12 @@ export default function SignIn() {
         </Link>
 
         <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-300'>
-          Sign in to your account
+          Create your account
         </h2>
       </div>
+
       <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-        <form className='space-y-6' onSubmit={signInUser}>
+        <form className='space-y-6' onSubmit={registerUser}>
           <div>
             <label
               htmlFor='email'
@@ -92,18 +96,18 @@ export default function SignIn() {
               type='submit'
               className='flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
             >
-              Sign in
+              Create an account
             </button>
           </div>
         </form>
 
         <p className='mt-10 text-center text-sm text-gray-400'>
-          Not a member?{" "}
+          Already have an account?{" "}
           <Link
-            to='/register'
+            to='/signin'
             className='font-semibold leading-6 text-red-600 hover:text-red-500'
           >
-            Register
+            Login
           </Link>
         </p>
       </div>
