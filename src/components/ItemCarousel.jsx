@@ -24,36 +24,30 @@ const responsive = {
 
 const ItemCarousel = ({ items }) => {
   return (
-    <div>
-      {/* <div className='mx-auto max-w-7xl p-2 sm:p-6 lg:p-8 pb-2'>
-        <h1 className='text-center text-xl font-medium tracking-tight text-white sm:text-2xl'>
-          {title}
-        </h1>
-      </div> */}
-      <Carousel
-        responsive={responsive}
-        swipeable={true}
-        draggable={true}
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        customTransition='all .5'
-        transitionDuration={500}
-        containerClass='carousel-container'
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        itemClass='carousel-item-padding-40-px'
-      >
-        {items.map((item) => (
-          <div key={item.id} className='p-2'>
-            <img
-              className='mx-2'
-              src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
-              alt={item.title}
-            />
-          </div>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel
+      responsive={responsive}
+      swipeable={true}
+      draggable={true}
+      infinite={true}
+      autoPlaySpeed={1000}
+      keyBoardControl={true}
+      customTransition='all .5'
+      transitionDuration={500}
+      containerClass='carousel-container'
+      removeArrowOnDeviceType={["tablet", "mobile"]}
+      itemClass='carousel-item-padding-40-px'
+    >
+      {items.map((item) => (
+        <div className='container p-1 cursor-pointer' key={item.id}>
+          <img
+            className='image'
+            src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+            alt={item.title}
+          />
+          <div className='overlay'>{item.title}</div>
+        </div>
+      ))}
+    </Carousel>
   );
 };
 
